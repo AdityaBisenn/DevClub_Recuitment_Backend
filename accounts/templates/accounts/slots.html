@@ -7,12 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="/profile">My Profile</a>
+    {% for i in slots %}
+    <li>
+        <a href="/book_slot/{{i.id}}">{{i.date}} [{{i.start_time}} - {{i.end_time}}] </a>
+        <br>
+        Booked : {{i.booked}} / {{i.capacity}}
+        
+    </li>
     <br>
-    <a href="/book_slots">Book Slots</a>
     <br>
-    <a href="/view_slots">View Booked Slots</a>
-    <br>
-    <a href="/logout">Logout</a>
+
+    {% endfor %}
 </body>
 </html>

@@ -7,12 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="/profile">My Profile</a>
-    <br>
-    <a href="/book_slots">Book Slots</a>
-    <br>
-    <a href="/view_slots">View Booked Slots</a>
-    <br>
-    <a href="/logout">Logout</a>
+    {% for i in courts %}
+    <li>
+        <a href="/slots/{{i.id}}">{{i.name}} {{i.sport.name}}</a>
+    </li>
+    {% endfor %}
 </body>
 </html>
