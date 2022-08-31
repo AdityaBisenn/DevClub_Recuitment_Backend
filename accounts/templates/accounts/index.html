@@ -14,5 +14,19 @@
     <a href="/view_slots">View Booked Slots</a>
     <br>
     <a href="/logout">Logout</a>
+
+    {% if is_staff %}
+    <br>
+    <br>
+    This section is only for staff
+    <br>
+    <a href="/addslot">Add slot</a>
+    <br>
+    <a href="/deleteslot">Delete slot</a>
+    <br>
+    <a href="/addmultiple">Add multiple slots</a>
+
+    {% endif %}
+
 </body>
 </html>

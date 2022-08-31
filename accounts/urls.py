@@ -15,5 +15,6 @@ urlpatterns = [
     path('book_slot/<slug:slot_id>',views.bookslot,name='book slot'),
     path('confirm/<slug:slot_id>',views.confirm,name='confirm'),
     path('view_slots',views.bookedslots,name='my slots'),
+    path('profile',views.profile,name='profile')
 
 ]

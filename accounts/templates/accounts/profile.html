@@ -7,15 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    {% for i in slots %}
-    <li>
-        <a href="/book_slot/{{i.id}}">{{i.date}} [{{i.start_time}} - {{i.end_time}}] </a>
-        <br>
-        Booked : {{i.booked}} / {{i.capacity}}
-        
-    </li>
+    Name : {{member.user.first_name}} {{member.user.last_name}}
     <br>
+    Entry Number : {{member.entry_num}}
+    <br>
+    Email : {{member.user.email}}
 
-    {% endfor %}
+    
 </body>
 </html>

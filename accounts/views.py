@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import datetime
 
-from accounts.models import Member, Slot, Sport,Court
+from accounts.models import Member, Slot, Sport,Court, Staff
 
 
 # from requests import request
@@ -11,13 +12,36 @@ from accounts.models import Member, Slot, Sport,Court
 # import accounts
 
 # Create your views here.
+
+def isStaff(user):
+    try:
+        staff1 = Staff.objects.get(user=user)
+        return True
+    except:
+        return False
+
+
+
+
+def refreshslots():
+    today = datetime.date.now()
+    
+
+
+
+
+
+
+
 def index(request):
     # print(request.user)
     print(request.user)
+    is_staff = isStaff(request.user)
+    # print(staff1)
     if request.user.is_anonymous:
         return redirect('/login')
     else:
-        return render(request,'accounts/index.html')
+        return render(request,'accounts/index.html',{'is_staff':is_staff})
 
 def login1(request):
     if request.user.is_anonymous:
@@ -134,6 +158,10 @@ def bookedslots(request):
     member = Member.objects.get(user = request.user)
     slots = member.slots.all()
     return render(request,'accounts/myslots.html',{'slots':slots})
+
+def profile(request):
+    member = Member.objects.get(user = request.user)
+    return render(request,'accounts/profile.html',{'member':member})
 
 
 @login_required
