@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        Court
+        <select name="court" id="court">
+            {% for i in courts %}
+            <option value="{{i.id}}">{{i.name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        Start Time 
+        <input type="time" name="start_time" id="start_time">
+        <br>
+        End Time 
+        <input type="time" name="end_time" id="end_time">
+        <br>
+        <button type="submit">Add Slot</button>
+
+
+    </form>
+    
+</body>
+</html>

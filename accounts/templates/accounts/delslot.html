@@ -7,8 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    Oops! this slot has already been booked by you
-    <br>
-    <a href="/">Home</a>
+    {% for i in slots %}
+    <li>
+        <a href="/deleteslot/{{i.id}}">{{i.court.sport.name}} {{i.court.name}} [ {{i.start_time}} - {{i.end_time}} ] </a>
+    </li>
+    {% endfor %}
 </body>
 </html>

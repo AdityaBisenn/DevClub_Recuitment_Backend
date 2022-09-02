@@ -24,7 +24,36 @@ def isStaff(user):
 
 
 def refreshslots():
-    today = datetime.date.now()
+    today = datetime.date.today()
+    demo_slot = Slot.objects.get(id = 1)
+    if demo_slot.date != today:
+        print(today)
+        slots_list = Slot.objects.all()
+        print(slots_list)
+        print(type(slots_list))
+
+        members = Member.objects.all()
+        print(type(members))
+        for i in slots_list:
+            i.date = today
+            i.booked = 0
+            i.save()
+        for i in members:
+            i.slots.clear()
+            i.save()
+            # print(i.user)
+            # print(i.slots.all())
+            # i.slots.clear()
+            # # print(i.slots.all())
+            # i.save(
+        # slots_list = Slot.objects.all()
+        
+            
+        # for i in slots_list():
+        #     print(i)
+
+    
+    
     
 
 
@@ -41,6 +70,7 @@ def index(request):
     if request.user.is_anonymous:
         return redirect('/login')
     else:
+        refreshslots()
         return render(request,'accounts/index.html',{'is_staff':is_staff})
 
 def login1(request):
@@ -133,7 +163,7 @@ def confirm(request,slot_id):
     slot = Slot.objects.get(id=slot_id)
     member = Member.objects.get(user = request.user)
 
-    if slot.booked>=slot.capacity:
+    if slot.booked>=slot.court.capacity:
         slot.status = 2
         slot.save()
     if slot in member.slots.all():
@@ -145,7 +175,7 @@ def confirm(request,slot_id):
         slot.save()
         member.slots.add(slot)
         
-        if slot.booked>=slot.capacity:
+        if slot.booked>=slot.court.capacity:
             slot.status = 2
             slot.save()
         return render(request,'accounts/confirm.html')
@@ -162,6 +192,20 @@ def bookedslots(request):
 def profile(request):
     member = Member.objects.get(user = request.user)
     return render(request,'accounts/profile.html',{'member':member})
+
+
+def addslotsport(request):
+    sports = Sport.objects.all()
+    return render(request,'accounts/add_slot.html',{'sports':sports})
+
+def addslotf(request,sport_id):
+    sport = Sport.objects.get(id = sport_id)
+    courts = Court.objects.filter(sport=sport)
+    return render(request,'accounts/addslotcourt.html',{'courts':courts})
+
+def delslot(request):
+    slots = Slot.objects.all()
+    return render(request,'accounts/delslot.html',{'slots':slots})
 
 
 @login_required

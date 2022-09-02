@@ -17,10 +17,11 @@ class Sport(models.Model):
 class Court(models.Model):
     name = models.CharField(max_length=100)
     sport = models.ForeignKey(Sport,on_delete=models.CASCADE)
+    capacity = models.PositiveIntegerField()
+
 
 class Slot(models.Model):
     court = models.ForeignKey(Court,on_delete=models.CASCADE)
-    capacity = models.PositiveIntegerField()
     booked = models.IntegerField(default=0)
     date = models.DateField()
     start_time = models.TimeField()
@@ -32,11 +33,14 @@ class Slot(models.Model):
 
     # members = models.ManyToManyField(Member)
 
+    def __str__(self):
+        return str(self.date) + " " + str(self.start_time) +" - "+ str(self.end_time)
+
 
 class Member(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     entry_num = models.CharField(max_length=100)
-    slots = models.ManyToManyField(Slot)
+    slots = models.ManyToManyField(Slot,blank=True)
 
     # if booked>=capacity:
     #     status = '2'

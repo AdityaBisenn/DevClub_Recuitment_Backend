@@ -7,21 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    {% if  %}
-    <form action="">
-        Sport 
-        <input type="text">
-        Court
-        <input type="text">
-        Capacity
-        <input type="text">
-        Date
-        <input type="text">
-        Start Time
-        <input type="text">
-        End Time
-        <input type="text">
-    </form>
+    Select a sport
+    <br>
+    {% for i in sports %}
+    <li>
+        <a href="/add_slot/{{i.id}}">{{i.name}}</a>
+    </li>
+    {% endfor %}
     
 </body>
 </html>
